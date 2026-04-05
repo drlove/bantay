@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Cards</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Model Cards</h1>
+      <div class="btn-group">
+        <button id="newCardBtn" class="btn btn-primary">+ New Model Card</button>
+        <button id="exportBtn" class="btn btn-secondary">Export All</button>
+        <button id="importBtn" class="btn btn-secondary">Import</button>
+        <input type="file" id="importFile" accept=".json" style="display: none;">
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="listView">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search model cards...">
+      </div>
+      <div id="cardsList"></div>
+    </div>
+
+    <div id="formView" class="hidden">
+      <div class="form-container">
+        <h2 id="formTitle">New Model Card</h2>
+        
+        <div class="form-section">
+          <div class="section-header">1. Model Details</div>
+          <div class="section-content">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Model Name *</label>
+                <input type="text" id="name" required>
+              </div>
+              <div class="form-group">
+                <label for="organization">Organization</label>
+                <input type="text" id="organization">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="modelDate">Model Date</label>
+                <input type="date" id="modelDate">
+              </div>
+              <div class="form-group">
+                <label for="modelVersion">Version</label>
+                <input type="text" id="modelVersion" placeholder="e.g., 1.0.0">
+              </div>
+              <div class="form-group">
+                <label for="modelType">Model Type</label>
+                <input type="text" id="modelType" placeholder="e.g., Classification, NLP, Vision">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="trainingAlgorithms">Training Algorithms & Parameters</label>
+              <textarea id="trainingAlgorithms" placeholder="Describe the training algorithms, parameters, fairness constraints..."></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="paperUrl">Paper/Resource URL</label>
+                <input type="url" id="paperUrl" placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label for="license">License</label>
+                <input type="text" id="license" placeholder="e.g., MIT, Apache 2.0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="citationDetails">Citation Details</label>
+              <textarea id="citationDetails" placeholder="How to cite this model..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Contact Email</label>
+              <input type="email" id="contactEmail" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="contactPerson">Contact Person</label>
+              <input type="text" id="contactPerson" placeholder="Name of the contact person">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">2. Intended Use</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="primaryUses">Primary Intended Uses</label>
+              <textarea id="primaryUses" placeholder="Describe the primary use cases this model was designed for..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="primaryUsers">Primary Intended Users</label>
+              <textarea id="primaryUsers" placeholder="Who are the intended users of this model?"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="outOfScopeUses">Out-of-Scope Use Cases</label>
+              <textarea id="outOfScopeUses" placeholder="Describe use cases that are outside the scope of this model..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">3. Factors</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="relevantFactors">Relevant Factors</label>
+              <textarea id="relevantFactors" placeholder="Factors that may affect model performance (demographic, phenotypic, environmental, technical)..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="evaluationFactors">Evaluation Factors</label>
+              <textarea id="evaluationFactors" placeholder="Factors considered during evaluation..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">4. Metrics</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="performanceMeasures">Model Performance Measures</label>
+              <textarea id="performanceMeasures" placeholder="Describe the metrics used to evaluate model performance (accuracy, precision, recall, F1, AUC, etc.)..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="decisionThresholds">Decision Thresholds</label>
+              <textarea id="decisionThresholds" placeholder="What decision thresholds were used? Why were they chosen?"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="uncertaintyApproach">Approaches to Uncertainty & Variability</label>
+              <textarea id="uncertaintyApproach" placeholder="How was uncertainty and variability addressed?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">5. Evaluation Data</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="evaluationDatasets">Datasets Used for Evaluation</label>
+              <textarea id="evaluationDatasets" placeholder="Describe the datasets used for evaluation, including their sources and composition..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="evaluationMotivation">Motivation for Dataset Selection</label>
+              <textarea id="evaluationMotivation" placeholder="Why were these particular datasets selected for evaluation?"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="evaluationPreprocessing">Preprocessing Steps</label>
+              <textarea id="evaluationPreprocessing" placeholder="Describe any preprocessing steps applied to the evaluation data..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">6. Training Data</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="trainingDataOverview">Training Data Overview</label>
+              <textarea id="trainingDataOverview" placeholder="Provide an overview of the training data sources, composition, and any relevant characteristics..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">7. Quantitative Analyses</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="unitaryResults">Unitary Results</label>
+              <textarea id="unitaryResults" placeholder="Report disaggregated evaluation results by chosen factors..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="intersectionalResults">Intersectional Results</label>
+              <textarea id="intersectionalResults" placeholder="Report intersectional analysis results combining multiple factors..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">8. Ethical Considerations</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="ethicalData">Data Concerns</label>
+              <textarea id="ethicalData" placeholder="Describe any ethical concerns related to the training or evaluation data..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="ethicalHumanLife">Human Life Considerations</label>
+              <textarea id="ethicalHumanLife" placeholder="Does this model have potential implications for human life or safety?"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="ethicalMitigations">Mitigations Applied</label>
+              <textarea id="ethicalMitigations" placeholder="What ethical mitigations were applied during development?"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="ethicalRisks">Risks and Harms</label>
+              <textarea id="ethicalRisks" placeholder="Identify potential risks and harms associated with this model..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="ethicalUseCases">Use Cases Review</label>
+              <textarea id="ethicalUseCases" placeholder="How were use cases reviewed for ethical concerns?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">9. Caveats and Recommendations</div>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="caveats">Additional Caveats</label>
+              <textarea id="caveats" placeholder="List any additional concerns not covered in previous sections..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="recommendations">Recommendations for Future Work</label>
+              <textarea id="recommendations" placeholder="What improvements or future work would you recommend?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button id="saveCardBtn" class="btn btn-primary">Save Model Card</button>
+          <button id="cancelBtn" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cardView" class="hidden">
+      <div class="viewer">
+        <div class="viewer-header">
+          <h2 id="cardTitle">Model Card</h2>
+          <div class="btn-group">
+            <button class="btn btn-secondary" onclick="app.showList()">Back to List</button>
+            <button class="btn btn-primary" onclick="app.printCard()">Print</button>
+          </div>
+        </div>
+        <div id="cardContent"></div>
+        <div class="card-actions-view">
+          <button class="btn btn-secondary" onclick="app.editCard(window.currentCardId)">Edit</button>
+          <button class="btn btn-danger" onclick="app.deleteCard(window.currentCardId)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="scripts/storage.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
