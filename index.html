@@ -90,7 +90,77 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">2. Intended Use</div>
+          <div class="section-header">2. Common Platform Enumeration (CPE)</div>
+          <div class="section-content">
+            <p class="field-hint">CPE 2.3 provides a standardized way to identify this model as a software product for vulnerability tracking and SBOM purposes.</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cpePart">Part</label>
+                <select id="cpePart">
+                  <option value="a" selected>a – Application</option>
+                  <option value="o">o – Operating System</option>
+                  <option value="h">h – Hardware</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="cpeVendor">Vendor</label>
+                <input type="text" id="cpeVendor" placeholder="e.g., openai (lowercase, no spaces)">
+              </div>
+              <div class="form-group">
+                <label for="cpeProduct">Product</label>
+                <input type="text" id="cpeProduct" placeholder="e.g., gpt-4 (lowercase, no spaces)">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cpeVersion">Version</label>
+                <input type="text" id="cpeVersion" placeholder="e.g., 1.0.0 (* for any)">
+              </div>
+              <div class="form-group">
+                <label for="cpeUpdate">Update</label>
+                <input type="text" id="cpeUpdate" placeholder="e.g., patch1 (* for any)">
+              </div>
+              <div class="form-group">
+                <label for="cpeEdition">Edition</label>
+                <input type="text" id="cpeEdition" placeholder="e.g., enterprise (* for any)">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cpeLanguage">Language</label>
+                <input type="text" id="cpeLanguage" placeholder="e.g., en-US (* for any)">
+              </div>
+              <div class="form-group">
+                <label for="cpeSwEdition">SW Edition</label>
+                <input type="text" id="cpeSwEdition" placeholder="e.g., professional (* for any)">
+              </div>
+              <div class="form-group">
+                <label for="cpeTargetSw">Target SW</label>
+                <input type="text" id="cpeTargetSw" placeholder="e.g., pytorch, tensorflow (* for any)">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cpeTargetHw">Target HW</label>
+                <input type="text" id="cpeTargetHw" placeholder="e.g., x86_64, arm64, gpu (* for any)">
+              </div>
+              <div class="form-group">
+                <label for="cpeOther">Other</label>
+                <input type="text" id="cpeOther" placeholder="Additional identifier (* for any)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cpeUri">CPE 2.3 URI</label>
+              <div class="input-with-btn">
+                <input type="text" id="cpeUri" placeholder="cpe:2.3:a:vendor:product:version:update:edition:language:sw_edition:target_sw:target_hw:other">
+                <button type="button" id="generateCpeBtn" class="btn btn-secondary">Generate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-header">3. Intended Use</div>
           <div class="section-content">
             <div class="form-group">
               <label for="primaryUses">Primary Intended Uses</label>
@@ -108,7 +178,7 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">3. Factors</div>
+          <div class="section-header">4. Factors</div>
           <div class="section-content">
             <div class="form-group">
               <label for="relevantFactors">Relevant Factors</label>
@@ -122,7 +192,7 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">4. Metrics</div>
+          <div class="section-header">5. Metrics</div>
           <div class="section-content">
             <div class="form-group">
               <label for="performanceMeasures">Model Performance Measures</label>
@@ -140,7 +210,7 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">5. Evaluation Data</div>
+          <div class="section-header">6. Evaluation Data</div>
           <div class="section-content">
             <div class="form-group">
               <label for="evaluationDatasets">Datasets Used for Evaluation</label>
@@ -158,7 +228,7 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">6. Training Data</div>
+          <div class="section-header">7. Training Data</div>
           <div class="section-content">
             <div class="form-group">
               <label for="trainingDataOverview">Training Data Overview</label>
@@ -168,7 +238,7 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">7. Quantitative Analyses</div>
+          <div class="section-header">8. Quantitative Analyses</div>
           <div class="section-content">
             <div class="form-group">
               <label for="unitaryResults">Unitary Results</label>
@@ -182,7 +252,7 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">8. Ethical Considerations</div>
+          <div class="section-header">9. Ethical Considerations</div>
           <div class="section-content">
             <div class="form-group">
               <label for="ethicalData">Data Concerns</label>
@@ -208,7 +278,7 @@
         </div>
 
         <div class="form-section">
-          <div class="section-header">9. Caveats and Recommendations</div>
+          <div class="section-header">10. Caveats and Recommendations</div>
           <div class="section-content">
             <div class="form-group">
               <label for="caveats">Additional Caveats</label>

@@ -269,6 +269,22 @@ h1 {
   gap: 1rem;
 }
 
+.field-hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.input-with-btn {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-with-btn input {
+  flex: 1;
+  min-width: 0;
+}
+
 .form-actions {
   display: flex;
   gap: 1rem;

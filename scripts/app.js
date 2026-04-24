@@ -28,7 +28,8 @@ class ModelCardApp {
     document.getElementById('importBtn').addEventListener('click', () => this.importCards());
     document.getElementById('importFile').addEventListener('change', (e) => this.handleImport(e));
     document.getElementById('searchInput').addEventListener('input', (e) => this.filterCards(e.target.value));
-    
+    document.getElementById('generateCpeBtn').addEventListener('click', () => this.generateCpeUri());
+
     document.querySelectorAll('.section-header').forEach(header => {
       header.addEventListener('click', () => {
         header.classList.toggle('collapsed');
@@ -107,6 +108,8 @@ class ModelCardApp {
     const fields = [
       'name', 'organization', 'modelDate', 'modelVersion', 'modelType',
       'trainingAlgorithms', 'paperUrl', 'citationDetails', 'license', 'contactEmail', 'contactPerson',
+      'cpePart', 'cpeVendor', 'cpeProduct', 'cpeVersion', 'cpeUpdate', 'cpeEdition',
+      'cpeLanguage', 'cpeSwEdition', 'cpeTargetSw', 'cpeTargetHw', 'cpeOther', 'cpeUri',
       'primaryUses', 'primaryUsers', 'outOfScopeUses',
       'relevantFactors', 'evaluationFactors',
       'performanceMeasures', 'decisionThresholds', 'uncertaintyApproach',
@@ -137,6 +140,9 @@ class ModelCardApp {
       paperUrl: 'modelDetails', citationDetails: 'modelDetails', license: 'modelDetails',
       contactEmail: 'modelDetails',
       contactPerson: 'modelDetails',
+      cpePart: 'cpe', cpeVendor: 'cpe', cpeProduct: 'cpe', cpeVersion: 'cpe',
+      cpeUpdate: 'cpe', cpeEdition: 'cpe', cpeLanguage: 'cpe', cpeSwEdition: 'cpe',
+      cpeTargetSw: 'cpe', cpeTargetHw: 'cpe', cpeOther: 'cpe', cpeUri: 'cpe',
       primaryUses: 'intendedUse', primaryUsers: 'intendedUse', outOfScopeUses: 'intendedUse',
       relevantFactors: 'factors', evaluationFactors: 'factors',
       performanceMeasures: 'metrics', decisionThresholds: 'metrics', uncertaintyApproach: 'metrics',
@@ -166,6 +172,20 @@ class ModelCardApp {
         license: document.getElementById('license').value,
         contactEmail: document.getElementById('contactEmail').value,
         contactPerson: document.getElementById('contactPerson').value
+      },
+      cpe: {
+        cpePart: document.getElementById('cpePart').value,
+        cpeVendor: document.getElementById('cpeVendor').value,
+        cpeProduct: document.getElementById('cpeProduct').value,
+        cpeVersion: document.getElementById('cpeVersion').value,
+        cpeUpdate: document.getElementById('cpeUpdate').value,
+        cpeEdition: document.getElementById('cpeEdition').value,
+        cpeLanguage: document.getElementById('cpeLanguage').value,
+        cpeSwEdition: document.getElementById('cpeSwEdition').value,
+        cpeTargetSw: document.getElementById('cpeTargetSw').value,
+        cpeTargetHw: document.getElementById('cpeTargetHw').value,
+        cpeOther: document.getElementById('cpeOther').value,
+        cpeUri: document.getElementById('cpeUri').value
       },
       intendedUse: {
         primaryUses: document.getElementById('primaryUses').value,
@@ -265,6 +285,24 @@ class ModelCardApp {
       </section>
 
       <section class="card-section">
+        <h3>Common Platform Enumeration (CPE)</h3>
+        <dl>
+          ${card.cpe?.cpeUri ? `<dt>CPE 2.3 URI</dt><dd><code>${this.escapeHtml(card.cpe.cpeUri)}</code></dd>` : ''}
+          <dt>Part</dt><dd>${this.escapeHtml(card.cpe?.cpePart || '-')}</dd>
+          <dt>Vendor</dt><dd>${this.escapeHtml(card.cpe?.cpeVendor || '-')}</dd>
+          <dt>Product</dt><dd>${this.escapeHtml(card.cpe?.cpeProduct || '-')}</dd>
+          <dt>Version</dt><dd>${this.escapeHtml(card.cpe?.cpeVersion || '-')}</dd>
+          <dt>Update</dt><dd>${this.escapeHtml(card.cpe?.cpeUpdate || '-')}</dd>
+          <dt>Edition</dt><dd>${this.escapeHtml(card.cpe?.cpeEdition || '-')}</dd>
+          <dt>Language</dt><dd>${this.escapeHtml(card.cpe?.cpeLanguage || '-')}</dd>
+          <dt>SW Edition</dt><dd>${this.escapeHtml(card.cpe?.cpeSwEdition || '-')}</dd>
+          <dt>Target SW</dt><dd>${this.escapeHtml(card.cpe?.cpeTargetSw || '-')}</dd>
+          <dt>Target HW</dt><dd>${this.escapeHtml(card.cpe?.cpeTargetHw || '-')}</dd>
+          <dt>Other</dt><dd>${this.escapeHtml(card.cpe?.cpeOther || '-')}</dd>
+        </dl>
+      </section>
+
+      <section class="card-section">
         <h3>Intended Use</h3>
         <dl>
           <dt>Primary Uses</dt><dd>${this.escapeHtml(card.intendedUse?.primaryUses || '-')}</dd>
@@ -331,6 +369,13 @@ class ModelCardApp {
         </dl>
       </section>
     `;
+  }
+
+  generateCpeUri() {
+    const v = (id) => document.getElementById(id).value.trim() || '*';
+    const part = document.getElementById('cpePart').value || 'a';
+    const uri = `cpe:2.3:${part}:${v('cpeVendor')}:${v('cpeProduct')}:${v('cpeVersion')}:${v('cpeUpdate')}:${v('cpeEdition')}:${v('cpeLanguage')}:${v('cpeSwEdition')}:${v('cpeTargetSw')}:${v('cpeTargetHw')}:${v('cpeOther')}`;
+    document.getElementById('cpeUri').value = uri;
   }
 
   editCard(id) {
