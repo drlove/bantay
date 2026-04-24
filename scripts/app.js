@@ -82,7 +82,7 @@ class ModelCardApp {
     container.innerHTML = cards.map(card => `
       <div class="card-item">
         <div class="card-header">
-          <h3>${this.escapeHtml(card.modelDetails?.name || 'Untitled')}</h3>
+          <h3><span class="cve-alarm" id="alarm-${card.id}"></span>${this.escapeHtml(card.modelDetails?.name || 'Untitled')}</h3>
           <span class="card-type">${this.escapeHtml(card.modelDetails?.modelType || 'Unknown type')}</span>
         </div>
         <p class="card-org">${this.escapeHtml(card.modelDetails?.organization || 'No organization')}</p>
@@ -95,7 +95,30 @@ class ModelCardApp {
         </div>
       </div>
     `).join('');
+
+    this.checkCveAlarms(cards);
   }
+
+  async checkCveAlarms(cards) {
+    for (const card of cards) {
+      const cpeUri = card.cpe?.cpeUri;
+      if (!cpeUri) continue;
+      try {
+        const res = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=${encodeURIComponent(cpeUri)}`);
+        const data = await res.json();
+        if (data.totalResults > 0) {
+          const el = document.getElementById(`alarm-${card.id}`);
+          if (el) {
+            el.textContent = '🚨';
+            el.title = `${data.totalResults} CVE(s) found in NVD`;
+          }
+        }
+      } catch {
+        // NVD unavailable — fail silently
+      }
+    }
+  }
+
 
   showForm(cardData = null) {
     this.view = 'form';
