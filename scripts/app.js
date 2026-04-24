@@ -38,6 +38,7 @@ class ModelCardApp {
       this.cpeVendorEdited = true;
     });
     document.getElementById('generateCpeBtn').addEventListener('click', () => this.generateCpeUri());
+    document.getElementById('verifyNvdBtn').addEventListener('click', () => this.verifyOnNvd());
 
     document.querySelectorAll('.section-header').forEach(header => {
       header.addEventListener('click', () => {
@@ -379,6 +380,14 @@ class ModelCardApp {
         </dl>
       </section>
     `;
+  }
+
+  verifyOnNvd() {
+    const vendor = document.getElementById('cpeVendor').value.trim();
+    const product = document.getElementById('cpeProduct').value.trim();
+    const keyword = [vendor, product].filter(Boolean).join(' ');
+    const url = `https://nvd.nist.gov/products/cpe/search${keyword ? '?keyword=' + encodeURIComponent(keyword) : ''}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   generateCpeUri() {
