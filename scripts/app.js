@@ -295,9 +295,9 @@ class ModelCardApp {
           <dt>Update</dt><dd>${this.escapeHtml(card.cpe?.cpeUpdate || '-')}</dd>
           <dt>Edition</dt><dd>${this.escapeHtml(card.cpe?.cpeEdition || '-')}</dd>
           <dt>Language</dt><dd>${this.escapeHtml(card.cpe?.cpeLanguage || '-')}</dd>
-          <dt>SW Edition</dt><dd>${this.escapeHtml(card.cpe?.cpeSwEdition || '-')}</dd>
-          <dt>Target SW</dt><dd>${this.escapeHtml(card.cpe?.cpeTargetSw || '-')}</dd>
-          <dt>Target HW</dt><dd>${this.escapeHtml(card.cpe?.cpeTargetHw || '-')}</dd>
+          <dt>Software Edition</dt><dd>${this.escapeHtml(card.cpe?.cpeSwEdition || '-')}</dd>
+          <dt>Target Software</dt><dd>${this.escapeHtml(card.cpe?.cpeTargetSw || '-')}</dd>
+          <dt>Target Hardware</dt><dd>${this.escapeHtml(card.cpe?.cpeTargetHw || '-')}</dd>
           <dt>Other</dt><dd>${this.escapeHtml(card.cpe?.cpeOther || '-')}</dd>
         </dl>
       </section>
