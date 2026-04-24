@@ -90,8 +90,8 @@ class ModelCardApp {
         <div class="card-actions">
           <button class="btn btn-sm" onclick="app.viewCard('${card.id}')">View</button>
           <button class="btn btn-sm" onclick="app.editCard('${card.id}')">Edit</button>
-          <button class="btn btn-sm btn-danger" onclick="app.deleteCard('${card.id}')">Delete</button>
           <button class="btn btn-sm" onclick="app.exportCard('${card.id}')">Export</button>
+          <button class="btn btn-sm btn-danger card-delete-btn" onclick="app.deleteCard('${card.id}')">Delete</button>
         </div>
       </div>
     `).join('');
@@ -130,7 +130,8 @@ class ModelCardApp {
       this.populateForm(cardData);
       this.currentCardId = cardData.id;
     } else {
-      document.getElementById('modelCardForm').reset();
+      document.querySelectorAll('#formView input, #formView textarea').forEach(el => el.value = '');
+      document.querySelectorAll('#formView select').forEach(el => el.selectedIndex = 0);
       this.currentCardId = null;
     }
     

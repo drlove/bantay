@@ -60,10 +60,10 @@ class ModelCardStorage {
     if (results.length === 0) return [];
     
     return results[0].values.map(row => ({
+      ...JSON.parse(row[3]),
       id: row[0],
       createdAt: row[1],
-      updatedAt: row[2],
-      ...JSON.parse(row[3])
+      updatedAt: row[2]
     }));
   }
 
@@ -75,10 +75,10 @@ class ModelCardStorage {
       const row = stmt.get();
       stmt.free();
       return {
+        ...JSON.parse(row[3]),
         id: row[0],
         createdAt: row[1],
-        updatedAt: row[2],
-        ...JSON.parse(row[3])
+        updatedAt: row[2]
       };
     }
     stmt.free();

@@ -173,6 +173,10 @@ h1 {
   flex-wrap: wrap;
 }
 
+.card-delete-btn {
+  margin-left: auto;
+}
+
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
