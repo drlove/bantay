@@ -3,6 +3,7 @@ class ModelCardApp {
     this.storage = new ModelCardStorage();
     this.currentCardId = null;
     this.view = 'list';
+    this.cpeVendorEdited = false;
   }
 
   async init() {
@@ -28,6 +29,14 @@ class ModelCardApp {
     document.getElementById('importBtn').addEventListener('click', () => this.importCards());
     document.getElementById('importFile').addEventListener('change', (e) => this.handleImport(e));
     document.getElementById('searchInput').addEventListener('input', (e) => this.filterCards(e.target.value));
+    document.getElementById('organization').addEventListener('input', (e) => {
+      if (!this.cpeVendorEdited) {
+        document.getElementById('cpeVendor').value = e.target.value;
+      }
+    });
+    document.getElementById('cpeVendor').addEventListener('input', () => {
+      this.cpeVendorEdited = true;
+    });
     document.getElementById('generateCpeBtn').addEventListener('click', () => this.generateCpeUri());
 
     document.querySelectorAll('.section-header').forEach(header => {
@@ -102,6 +111,7 @@ class ModelCardApp {
     }
     
     document.getElementById('formTitle').textContent = cardData ? 'Edit Model Card' : 'New Model Card';
+    this.cpeVendorEdited = false;
   }
 
   populateForm(cardData) {
