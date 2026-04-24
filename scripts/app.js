@@ -82,7 +82,7 @@ class ModelCardApp {
     container.innerHTML = cards.map(card => `
       <div class="card-item">
         <div class="card-header">
-          <h3><span class="cve-alarm" id="alarm-${card.id}"></span>${this.escapeHtml(card.modelDetails?.name || 'Untitled')}</h3>
+          <h3>${this.escapeHtml(card.modelDetails?.name || 'Untitled')}<span class="cve-alarm" id="alarm-${card.id}"></span></h3>
           <span class="card-type">${this.escapeHtml(card.modelDetails?.modelType || 'Unknown type')}</span>
         </div>
         <p class="card-org">${this.escapeHtml(card.modelDetails?.organization || 'No organization')}</p>
@@ -109,7 +109,11 @@ class ModelCardApp {
         if (data.totalResults > 0) {
           const el = document.getElementById(`alarm-${card.id}`);
           if (el) {
-            el.textContent = '🚨';
+            const earliest = data.vulnerabilities
+              .map(v => new Date(v.cve.published))
+              .reduce((a, b) => a < b ? a : b);
+            const dateStr = earliest.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            el.innerHTML = ` 🚨 <span class="cve-date">first reported ${dateStr}</span>`;
             el.title = `${data.totalResults} CVE(s) found in NVD`;
           }
         }
