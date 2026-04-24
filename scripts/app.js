@@ -295,7 +295,7 @@ class ModelCardApp {
       </section>
 
       <section class="card-section">
-        <h3>Common Platform Enumeration (CPE)</h3>
+        <h3>Common Platform Enumeration (optional if model is not yet released as an application)</h3>
         <dl>
           ${card.cpe?.cpeUri ? `<dt>CPE 2.3 URI</dt><dd><code>${this.escapeHtml(card.cpe.cpeUri)}</code></dd>` : ''}
           <dt>Part</dt><dd>${this.escapeHtml(card.cpe?.cpePart || '-')}</dd>
